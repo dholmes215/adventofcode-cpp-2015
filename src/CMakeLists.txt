@@ -1,1 +1,1 @@
-add_executable(hello hello.cpp)
+add_executable(day01 day01.cpp)
