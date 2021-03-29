@@ -19,6 +19,16 @@ std::ifstream open_file(int argc, char** argv)
     return file;
 }
 
+std::vector<std::string> read_lines(std::istream& stream)
+{
+    std::vector<std::string> out;
+    std::string line;
+    while (std::getline(stream, line)) {
+        out.emplace_back(line);
+    }
+    return out;
+}
+
 bool is_whitespace(char c)
 {
     // Cast is necessary because `isspace` on a negative `char` is UB.
