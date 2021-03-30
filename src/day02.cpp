@@ -14,10 +14,10 @@ using SqFt = int;
 
 // Dimensions of a box (in feet)
 struct box {
-    box(Feet l, Feet w, Feet h) : l(l), w(w), h(h) {}
-    Feet l;
-    Feet w;
-    Feet h;
+    box(Feet l, Feet w, Feet h) : length(l), width(w), height(h) {}
+    Feet length;
+    Feet width;
+    Feet height;
 };
 
 box box_from_string(const char* s)
@@ -35,7 +35,8 @@ box box_from_string(const char* s)
 // Calculate wrapping paper required for a single box.
 SqFt paper_required(const box& b)
 {
-    std::array<SqFt, 3> side_areas{b.l * b.w, b.l * b.h, b.w * b.h};
+    std::array<SqFt, 3> side_areas{b.length * b.width, b.length * b.height,
+                                   b.width * b.height};
     std::sort(begin(side_areas), end(side_areas));
 
     SqFt paper = side_areas[0] * 3  // smallest side
@@ -46,11 +47,12 @@ SqFt paper_required(const box& b)
 // Calculate ribbon required for a single box.
 Feet ribbon_required(const box& b)
 {
-    std::array<Feet, 3> side_perimeters{2 * (b.l + b.w), 2 * (b.l + b.h),
-                                        2 * (b.w + b.h)};
+    std::array<Feet, 3> side_perimeters{2 * (b.length + b.width),
+                                        2 * (b.length + b.height),
+                                        2 * (b.width + b.height)};
     Feet shortest_perimeter =
         *std::min_element(begin(side_perimeters), end(side_perimeters));
-    Feet bow = b.l * b.w * b.h;
+    Feet bow = b.length * b.width * b.height;
     Feet ribbon = shortest_perimeter + bow;
     return ribbon;
 }
