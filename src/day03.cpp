@@ -47,9 +47,8 @@ day02_result process_input(std::istream& file)
     std::set<Vec> part1_visited;
     part1_visited.insert(part1_location);
 
-    Vec part2_location{0, 0};
     std::set<Vec> part2_visited;
-    part2_visited.insert(part2_location);
+    part2_visited.insert(part2_santa_location);
     turn current_turn = turn::santa;
 
     for (const char c : istream_range{file}) {
